@@ -3,7 +3,8 @@
 Setting up a development environment for Unity AR Foundation for Android on Ubuntu
 
 ## Ubuntu
-I'm using Ubuntu 18 because Ubuntu 20 was giving me trouble.
+I'm using Ubuntu 18 because Ubuntu 20 was giving me trouble. *__Update:__ It also appears to work fine on Ubuntu 20 as well.*
+
 https://releases.ubuntu.com/18.04/
 
 ### Creating a persistent live USB for Ubuntu
@@ -27,6 +28,8 @@ https://linuxize.com/post/how-to-install-android-studio-on-ubuntu-18-04/
 `sudo apt install openjdk-8-jdk` *unable to locate package*
 
 __Note:__ You can now skip all the way down to "Install Java Straight-up" *I'm almost positive this is correct.*
+
+__To do:__ Go back with a fresh os installation and attempt to duplicate this process without any of these unnecessary steps. I think you can skip all of this but you may have to add that openjkd repo and maybe install that java-common package but I'm not 100% sure.
 
 https://stackoverflow.com/questions/32942023/ubuntu-openjdk-8-unable-to-locate-package
 
@@ -62,7 +65,9 @@ I think we could technically stop there for what we're doing but I'm going to fo
 
 __Note:__ I'm going to try skipping this whole Oracle JDK step. **
 
-Find the versio of the Oracle install script you need from https://launchpad.net/~linuxuprising/+archive/ubuntu/java/+packages. Find the one that matches your jdk version and os. `javac -version` will give you the jdk version. OS will be Bionic Beaver for this scenario.
+__To Do:__ Verify that we need to do any of this Oracle JDK stuff. I'm almost certain it is not needed.
+
+Find the version of the Oracle install script you need from https://launchpad.net/~linuxuprising/+archive/ubuntu/java/+packages. Find the one that matches your jdk version and os. `javac -version` will give you the jdk version. OS will be Bionic Beaver for this scenario.
 
 Go to the downloads page https://www.oracle.com/java/technologies/javase-downloads.html and find and download the right script. Download the file. You'll need to authenticate using an Oracle account to download it. If you don't have one create one.
 
@@ -87,6 +92,13 @@ add this line: `JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"`
 `echo $JAVA_HOME`
 
 ### Meanwhile... back in the Android Studio install
+
+
+#### Conjecture on Whether or not to Install Android Studio.
+
+__TLDR:__ Android Studio and the Command Line Tools installation of the SDK are both fine ways to set up Android development for Unity. However, installation and configuration of Android Studio is quick, straight-forward, well-documented and well-supported.
+
+Some developers in the community recommend installing just the SDK without installing Android Studio at all. While this can be done using the command line tools and the reasoning for it is valid, It's so much easier to just install Android Studio and let it guide you through the configuration of the Android SDK. In fact, I think I actually ran into some limitations where the command line tools support tends to stay notably behind support for Studio, meaning depending on when you try to set this up it may be broken and the docs you follow will mislead you. My opinion is that Google obviously favors the use of Studio and it's not really a tremendous overhead if you have a decent machine.
 
 `sudo snap install android-studio --classic`
 

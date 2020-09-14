@@ -9,10 +9,7 @@ https://releases.ubuntu.com/18.04/
 ### Creating a persistent live USB for Ubuntu
 https://www.howtogeek.com/howto/14912/create-a-persistent-bootable-ubuntu-usb-flash-drive/
 
-
-Make sure you partition this thing correctly. I got it backwards and gave it most of the disc for system files and not enough for storage. I think the left side is storage and the right side is system. Either that or the left side is for system and storage and the rest of it is left over. Or some other third thing. Like I could still access it anyway I just don't know what it's called.
-
-__Note:__ It may be a good idea to go back and revisit this. I'm pretty sure I could have just used the partition "usbdata". I may have done it correctly in the beginning and then gotten confused during the Unity install.
+Make sure you give it at least a good 10 gigs for the system. Unity will take up 6 or so, depending on what all components you select.
 
 ### Boot from the USB
 
@@ -28,6 +25,8 @@ https://linuxize.com/post/how-to-install-android-studio-on-ubuntu-18-04/
 `sudo apt update`
 
 `sudo apt install openjdk-8-jdk` *unable to locate package*
+
+__Note:__ You can now skip all the way down to "Install Java Straight-up" *I'm almost positive this is correct.*
 
 https://stackoverflow.com/questions/32942023/ubuntu-openjdk-8-unable-to-locate-package
 
@@ -60,6 +59,9 @@ https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on
 I think we could technically stop there for what we're doing but I'm going to follow through with the whole blog so this doesn't get sloppy.
 
 #### Oracle JDK
+
+__Note:__ I'm going to try skipping this whole Oracle JDK step. **
+
 Find the versio of the Oracle install script you need from https://launchpad.net/~linuxuprising/+archive/ubuntu/java/+packages. Find the one that matches your jdk version and os. `javac -version` will give you the jdk version. OS will be Bionic Beaver for this scenario.
 
 Go to the downloads page https://www.oracle.com/java/technologies/javase-downloads.html and find and download the right script. Download the file. You'll need to authenticate using an Oracle account to download it. If you don't have one create one.
@@ -119,11 +121,11 @@ The first link, "Linux Download Assistant", will trigger a download of a script 
 
 Give the script execute permission. `chmod +x /home/ubuntu/Downloads/UnitySetup-2018.2.7f1`
 
-Install some packages `sudo apt install libgtk2.0-0 libsoup2.4-1 libarchive13 libpng16-16 libgconf-2-4 lib32stdc++6 libcanberra-gtk-module` *unable to locate package libgconf-2-4*
-
-Upon further inspection of the libgconf-2-4 package on cannonical, it's only available from the "universe" repository. So before you run that command, add universe and update the cache.
+Add the universe repository for libgconf-2-4 package.
 
 `sudo add-apt-repository universe`
+
+Update the cache
 
 `sudo apt update`
 
@@ -136,4 +138,59 @@ Run the installer.
 
 The video only adds the components Unity and Documentation. I added Android Build Support as well.
 
-Select location "~/Downloads"
+Select location "Downloads" for both downloads and installation.
+
+When I created the persistent live ubuntu usb stick, I used a 32 gig usb 3.0 and gave it 25% for system and the rest for storage. This means that our system space is not sufficient and we have to use the data partition. If your stick is large enough, go for it. I chose a smaller size usb stick for cost and speed because mine is a 3.0 and anything over 32 gigs gets pretty pricey. And I knew I would be able to access the storage space for this very purpose. I guess technically I could have done it 50/50 and it would have been enough. Mainly I'm rambling now because the unity installation is taking a long time and it's still not done.
+
+`cd ~`
+`sudo mv ~/Downloads/Unity-2018.2.7f1 /opt/Unity3D`
+`sudo ln -s /opt/Unity3D/Editor/Unity /usr/bin/unity`
+`unity` *Or find it in the GUI and click on it*
+
+## Connecting Unity to Android SDK
+
+From the Unity app...
+
+Create a new project. (Or open and existing one.)
+
+Give it a unique name in player settings.
+
+### Configure Android SDK
+
+`Edit -> Preferences`
+
+Select the External Tools tab.
+
+Under Android, beside SDK, click the browse button.
+
+Mine was in `~/Android/Sdk`. Seems like it found it for me almost.
+
+You will also need to specify the JDK as well. Mine was at `/usr/lib/jvm/java-1.8.0-openjdk-amd64/`. Don't worry about it for now because later on in the process, a future step should detect jdk and suggest it for you. If not, you can come back here and troubleshoot.
+
+### Configure Player Settings
+
+`Edit -> Project Settings -> Player`
+
+Edit the company name at least, then product name if this is a real project.
+
+Expand "Other Settings"
+
+Under "Identification", make the Package Name reflect the company and project name. __Note:__ It must be unique.
+
+Open up build settings.
+
+### Configure Build Settings
+
+`File -> Build Settings` *There's a handy shortcut to open player settings if you need to make quick edits to that.*
+
+Under Platform, select Android.
+
+Make sure your phone is still connected and authenticated with android studio.
+
+Beside run device, select your device in the drop down.
+
+Click "Build and Run"
+
+Create a name for your build or overwrite the existing one. Probably need to follow the unique naming convention from player settings but I'm not really sure.
+
+Now wait for it to build and run. It will connect to the Android Sdk that was installed for you when you set up Android Studio. Once it's done, wake your phone up and find the app with the Unity logo (unless you stopped to actually work on your app and updated the logo. Then it should have your app's logo. Otherwise, since this document is just for setting up development and has nothing to do with building an actual app, you should have a basic app with a unity logo that launches an empty world where you can't even pan the camera).

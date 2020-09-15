@@ -206,3 +206,17 @@ Click "Build and Run"
 Create a name for your build or overwrite the existing one. Probably need to follow the unique naming convention from player settings but I'm not really sure.
 
 Now wait for it to build and run. It will connect to the Android Sdk that was installed for you when you set up Android Studio. Once it's done, wake your phone up and find the app with the Unity logo (unless you stopped to actually work on your app and updated the logo. Then it should have your app's logo. Otherwise, since this document is just for setting up development and has nothing to do with building an actual app, you should have a basic app with a unity logo that launches an empty world where you can't even pan the camera).
+
+## AR Foundation
+
+AR Foundation, but it's for iOS so it uses ARkit.
+
+https://www.youtube.com/watch?v=Ml2UakwRxjk&t=1153s
+
+
+### Vuforia 8
+
+This one covers Vuforia, which is what Unity uses to handle AR for Android
+https://www.youtube.com/watch?v=y7VD7yGwmV4
+
+Well, that guy was on Windows, so it really doesn't help us much.

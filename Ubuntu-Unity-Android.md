@@ -2,6 +2,8 @@
 
 Setting up a development environment for Unity AR Foundation for Android on Ubuntu
 
+*Note: I highly recommend using Mac or Windows for Android projects. I think I made it work on Ubuntu in another document somewhere but it's easy to mess this up. If you have a mac, use that for sure. You may even want to consider Windows. I'm just sayin'*
+
 ## Ubuntu
 I'm using Ubuntu 18 because Ubuntu 20 was giving me trouble. *__Update:__ It also appears to work fine on Ubuntu 20 as well.*
 
